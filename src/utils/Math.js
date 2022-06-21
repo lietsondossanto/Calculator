@@ -16,10 +16,8 @@ export const update = (value, expressio, setExpression, setResult) => {
   ) {
     return
   } else {
-    // Verifica de o último valor de expressão é "e" ou "π" se for adiciona X no final da expressão
-    if (expressio.at(-1) == "e" || expressio.at(-1) == "π") {
-      setExpression(expressio + " x " + filterOperators(value.toString(), true))
-    } else if (expressio.at(-1) == "%") {
+    // Verifica de o último valor de expressão é [e, π, %] se for adiciona X no final da expressão
+    if (expressio.at(-1) == "e" || expressio.at(-1) == "π" || expressio.at(-1) == "%") {
       setExpression(expressio + " x " + filterOperators(value.toString(), true))
     } else if (value == "(" || value == ")") {
       setExpression(expressio + value)
@@ -129,9 +127,9 @@ export const filterOperators = (value, clean = false) => {
         case 'x':
           return '*'
         case 'π':
-          return PI
+          return Math.PI
         case 'e':
-          return E
+          return Math.E
         default:
           return item
       }
@@ -156,13 +154,10 @@ export const percentage = (x) => {
 }
 
 // Calcula a raiz quadrada do valor de x
-export const sqrt = (value) => {
-  let valueClean = value.toString().replaceAll('(', '')
-  valueClean = valueClean.replaceAll(')', '')
-  valueClean = valueClean.replaceAll('√', '')
+export const sqrt = (x) => {
+  let value = x.toString().replaceAll('(', '').replaceAll(')', '').replaceAll('√', '')
 
-  if (!TheLastItemIsOperator(1, value)) {
-    let expression = eval(filterOperators(valueClean))
-    return sqrt(expression)
+  if (!TheLastItemIsOperator(1, x)) {
+    return sqrt(eval(filterOperators(value)))
   }
 }
