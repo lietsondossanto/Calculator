@@ -139,7 +139,6 @@ export const filterOperators = (value, clean = false) => {
   return newValue.toString().replaceAll(',', '')
 }
 
-
 // Verifica se o último valor do input(expression) é um operador(+,-,/,*,%) ou o ponto(.)
 export const TheLastItemIsOperator = (input) => {
   let value = filterOperators(input.toString().replaceAll(' ', '').at(-1))
@@ -147,17 +146,20 @@ export const TheLastItemIsOperator = (input) => {
   return operators.includes(value) ? true : false
 }
 
-// Calcula a Percentagem do valor de x
+// Calcula a Percentagem
 export const percentage = (x) => {
   if (x == 0) return
   return (eval(filterOperators(x)) * 1) / 100
 }
 
-// Calcula a raiz quadrada do valor de x
+// Calcula a raiz quadrada
 export const sqrt = (x) => {
-  let value = x.toString().replaceAll('(', '').replaceAll(')', '').replaceAll('√', '')
+  let value = x.toString()
+    .replaceAll('(', '')
+    .replaceAll(')', '')
+    .replaceAll('√', '')
 
   if (!TheLastItemIsOperator(1, x)) {
-    return sqrt(eval(filterOperators(value)))
+    return Math.sqrt(eval(filterOperators(value)))
   }
 }

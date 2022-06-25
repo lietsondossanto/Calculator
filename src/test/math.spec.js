@@ -2,7 +2,7 @@ import * as Math from './../utils/Math'
 
 describe('Testando a lib Math', () => {
   describe('Validando os valores', () => {
-    it('Deve validar a expressão matematica e retornar o resultadoo do calculo', () => {
+    it('Deve validar a expressão matematica e retornar o resultado do calculo', () => {
       expect(Math.calculate(10 + 10, 20)).toBe('20')
       expect(Math.calculate('√(4)')).toBe('2')
       expect(Math.calculate(0)).toBe('0')
